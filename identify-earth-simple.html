@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identify.earth - Element United Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        .header {
+            background: #1a1a1a;
+            border-bottom: 1px solid #333;
+            padding: 1rem 2rem;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 36px;
+            height: 36px;
+        }
+
+        .logo svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        h1 {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .nav {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .nav-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            background: transparent;
+            color: #999;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            color: white;
+        }
+
+        .nav-btn.active {
+            background: #E8FF00;
+            color: #1a1a1a;
+        }
+
+        .role-bar {
+            background: white;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 0.75rem 2rem;
+        }
+
+        .role-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .role-label {
+            color: #666;
+            font-size: 0.875rem;
+        }
+
+        .role-btn {
+            padding: 0.375rem 1rem;
+            border: none;
+            border-radius: 20px;
+            background: #f5f5f5;
+            color: #666;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .role-btn:hover {
+            background: #e5e5e5;
+        }
+
+        .role-btn.active {
+            background: #E8FF00;
+            color: #1a1a1a;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .metric-label {
+            color: #666;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-value {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-change {
+            font-size: 0.875rem;
+            color: #D4AF37;
+            font-weight: 500;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .primary-btn {
+            padding: 0.625rem 1.25rem;
+            background: #E8FF00;
+            border: none;
+            border-radius: 8px;
+            color: #1a1a1a;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: opacity 0.2s;
+        }
+
+        .primary-btn:hover {
+            opacity: 0.9;
+        }
+
+        .assets-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 1rem;
+        }
+
+        .asset-card {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: border-color 0.2s;
+        }
+
+        .asset-card:hover {
+            border-color: #ccc;
+        }
+
+        .asset-header {
+            display: flex;
+            justify-content: between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .asset-info {
+            flex: 1;
+        }
+
+        .asset-id {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .asset-location {
+            color: #666;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .badge-verified {
+            background: #E8FF00;
+            color: #1a1a1a;
+        }
+
+        .badge-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .asset-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #666;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-value {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .stat-value.gold {
+            color: #D4AF37;
+        }
+
+        .footer {
+            background: white;
+            border-top: 1px solid #e5e5e5;
+            margin-top: 3rem;
+            padding: 2rem;
+            text-center;
+        }
+
+        .footer-text {
+            color: #999;
+            font-size: 0.875rem;
+            font-style: italic;
+        }
+
+        .stria-card {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stria-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .stria-info h3 {
+            font-size: 1.125rem;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .stria-info p {
+            color: #666;
+            font-size: 0.875rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e5e5e5;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #D4AF37;
+            transition: width 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .asset-stats {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">
+                    <svg viewBox="0 0 100 100" fill="none">
+                        <path d="M50 5 L90 27.5 L90 72.5 L50 95 L10 72.5 L10 27.5 Z" 
+                              stroke="#E8FF00" stroke-width="4" fill="none"/>
+                        <path d="M50 15 L80 32.5 L80 67.5 L50 85 L20 67.5 L20 32.5 Z" 
+                              stroke="#E8FF00" stroke-width="4" fill="none"/>
+                        <path d="M50 25 L70 37.5 L70 62.5 L50 75" 
+                              stroke="#E8FF00" stroke-width="4" fill="none"/>
+                        <line x1="35" y1="50" x2="65" y2="50" 
+                              stroke="#E8FF00" stroke-width="4"/>
+                    </svg>
+                </div>
+                <h1>Identify.earth</h1>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn active" onclick="showTab('dashboard')">Dashboard</button>
+                <button class="nav-btn" onclick="showTab('core')">Core</button>
+                <button class="nav-btn" onclick="showTab('stria')">Stria</button>
+                <button class="nav-btn" onclick="showTab('certificates')">Certificates</button>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Role Selector -->
+    <div class="role-bar">
+        <div class="role-content">
+            <span class="role-label">View as:</span>
+            <button class="role-btn" onclick="switchRole('miner')">Mine Operator</button>
+            <button class="role-btn active" onclick="switchRole('investor')">Individual Investor</button>
+            <button class="role-btn" onclick="switchRole('enterprise')">Enterprise Buyer</button>
+            <button class="role-btn" onclick="switchRole('jeweler')">Jeweler</button>
+            <button class="role-btn" onclick="switchRole('esg')">ESG Analyst</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Dashboard Tab -->
+        <div id="dashboard-tab">
+            <div class="metrics-grid" id="metrics-grid">
+                <!-- Metrics will be inserted here -->
+            </div>
+        </div>
+
+        <!-- CORE Tab -->
+        <div id="core-tab" style="display:none;">
+            <div class="section-header">
+                <h2 class="section-title">CORE™ In-Ground Assets</h2>
+                <button class="primary-btn">Browse Opportunities</button>
+            </div>
+            
+            <div class="assets-grid">
+                <div class="asset-card">
+                    <div class="asset-header">
+                        <div class="asset-info">
+                            <div class="asset-id">
+                                YK-001
+                                <span class="badge badge-verified">✓ Verified</span>
+                            </div>
+                            <div class="asset-location">📍 Yukon Territory</div>
+                        </div>
+                    </div>
+                    <div class="asset-stats">
+                        <div class="stat">
+                            <div class="stat-label">Verified Value</div>
+                            <div class="stat-value">$1.4 trillion</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">ROI (6 mo)</div>
+                            <div class="stat-value gold">+12.4%</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Status</div>
+                            <div class="stat-value">Preserved</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="asset-card">
+                    <div class="asset-header">
+                        <div class="asset-info">
+                            <div class="asset-id">
+                                AZ-REX
+                                <span class="badge badge-verified">✓ Verified</span>
+                            </div>
+                            <div class="asset-location">📍 Arizona, USA</div>
+                        </div>
+                    </div>
+                    <div class="asset-stats">
+                        <div class="stat">
+                            <div class="stat-label">Verified Value</div>
+                            <div class="stat-value">$1.4 trillion</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">ROI (6 mo)</div>
+                            <div class="stat-value gold">+8.9%</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Status</div>
+                            <div class="stat-value">Preserved</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="asset-card">
+                    <div class="asset-header">
+                        <div class="asset-info">
+                            <div class="asset-id">
+                                TZ-SER
+                                <span class="badge badge-pending">⏱ Pending</span>
+                            </div>
+                            <div class="asset-location">📍 Serengeti, Tanzania</div>
+                        </div>
+                    </div>
+                    <div class="asset-stats">
+                        <div class="stat">
+                            <div class="stat-label">Verified Value</div>
+                            <div class="stat-value">$850 billion</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">ROI (6 mo)</div>
+                            <div class="stat-value">TBD</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Status</div>
+                            <div class="stat-value">Preserved</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STRIA Tab -->
+        <div id="stria-tab" style="display:none;">
+            <div class="section-header">
+                <h2 class="section-title">STRIA™ Certified Operations</h2>
+                <button class="primary-btn">Request Audit</button>
+            </div>
+
+            <div class="stria-card">
+                <div class="stria-header">
+                    <div class="stria-info">
+                        <h3>TanzRoc Gold</h3>
+                        <p>📍 Tanzania</p>
+                    </div>
+                    <span class="badge badge-verified">STRIA Certified</span>
+                </div>
+                <div class="asset-stats">
+                    <div class="stat">
+                        <div class="stat-label">Compliance Score</div>
+                        <div class="stat-value">98<span style="color:#999; font-size:0.875rem;">/100</span></div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 98%"></div>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">Last Audit</div>
+                        <div class="stat-value" style="font-size:0.875rem;">2024-10-15</div>
+                        <div class="stat-label" style="margin-top:0.25rem;">Next: +90 days</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">Supply Chain</div>
+                        <div class="stat-value" style="font-size:0.875rem; color:#10b981;">✓ Fully Traced</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stria-card">
+                <div class="stria-header">
+                    <div class="stria-info">
+                        <h3>Hoffman Yukon</h3>
+                        <p>📍 Canada</p>
+                    </div>
+                    <span class="badge badge-verified">STRIA Certified</span>
+                </div>
+                <div class="asset-stats">
+                    <div class="stat">
+                        <div class="stat-label">Compliance Score</div>
+                        <div class="stat-value">95<span style="color:#999; font-size:0.875rem;">/100</span></div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">Last Audit</div>
+                        <div class="stat-value" style="font-size:0.875rem;">2024-11-01</div>
+                        <div class="stat-label" style="margin-top:0.25rem;">Next: +90 days</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">Supply Chain</div>
+                        <div class="stat-value" style="font-size:0.875rem; color:#10b981;">✓ Fully Traced</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certificates Tab -->
+        <div id="certificates-tab" style="display:none;">
+            <h2 class="section-title" style="margin-bottom:1.5rem;">Digital Certificates</h2>
+            
+            <div class="stria-card">
+                <div class="stria-header">
+                    <div class="stria-info">
+                        <h3>🛡️ CERT-2024-001</h3>
+                        <p>CORE Asset Certificate</p>
+                    </div>
+                </div>
+                <div class="asset-stats">
+                    <div class="stat">
+                        <div class="stat-label">Entity</div>
+                        <div class="stat-value" style="font-size:0.875rem;">Rex Mine Gold</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">Issued</div>
+                        <div class="stat-value" style="font-size:0.875rem;">2024-11-15</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">Value</div>
+                        <div class="stat-value gold">$1.4T</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stria-card">
+                <div class="stria-header">
+                    <div class="stria-info">
+                        <h3>🛡️ CERT-2024-002</h3>
+                        <p>STRIA Compliance Certificate</p>
+                    </div>
+                </div>
+                <div class="asset-stats">
+                    <div class="stat">
+                        <div class="stat-label">Entity</div>
+                        <div class="stat-value" style="font-size:0.875rem;">TanzRoc Mining</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">Issued</div>
+                        <div class="stat-value" style="font-size:0.875rem;">2024-10-30</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">Score</div>
+                        <div class="stat-value gold">98/100</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p class="footer-text">
+            Every element tells a story. Element United built the system that maps them all—making trust infrastructure.
+        </p>
+    </div>
+
+    <script>
+        const metrics = {
+            investor: [
+                { label: 'Portfolio Value', value: '$247,500', change: '+12.4%' },
+                { label: 'Assets Owned', value: '3', change: '+1 this month' },
+                { label: 'ROI (YTD)', value: '18.7%', change: '+3.2%' },
+                { label: 'Verified Claims', value: '100%', change: 'All verified' }
+            ],
+            miner: [
+                { label: 'Verified Reserves', value: '$1.4T', change: 'Certified' },
+                { label: 'STRIA Score', value: '98/100', change: '+2 pts' },
+                { label: 'Compliance Status', value: 'Active', change: 'Last audit: 30d' },
+                { label: 'Market Premium', value: '+15%', change: 'vs unverified' }
+            ],
+            enterprise: [
+                { label: 'Verified Suppliers', value: '24', change: '+4 this quarter' },
+                { label: 'Supply Chain Score', value: '96/100', change: '+1 pt' },
+                { label: 'Traceable Materials', value: '98%', change: '+5%' },
+                { label: 'ESG Compliance', value: '100%', change: 'Certified' }
+            ],
+            jeweler: [
+                { label: 'Verified Pieces', value: '1,247', change: '+89 this month' },
+                { label: 'Supply Chain', value: '100%', change: 'Fully traced' },
+                { label: 'Customer Trust', value: '4.9/5', change: '+0.2' },
+                { label: 'Premium Revenue', value: '+22%', change: 'vs non-verified' }
+            ],
+            esg: [
+                { label: 'Monitored Operations', value: '156', change: '+12 onboarded' },
+                { label: 'Avg ESG Score', value: '92/100', change: '+3 pts' },
+                { label: 'Compliance Rate', value: '94%', change: '+2%' },
+                { label: 'Risk Exposure', value: 'Low', change: 'Decreased' }
+            ]
+        };
+
+        let currentRole = 'investor';
+
+        function renderMetrics() {
+            const grid = document.getElementById('metrics-grid');
+            const data = metrics[currentRole];
+            
+            grid.innerHTML = data.map(m => `
+                <div class="metric-card">
+                    <div class="metric-label">${m.label}</div>
+                    <div class="metric-value">${m.value}</div>
+                    <div class="metric-change">${m.change}</div>
+                </div>
+            `).join('');
+        }
+
+        function switchRole(role) {
+            currentRole = role;
+            
+            // Update button states
+            document.querySelectorAll('.role-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            renderMetrics();
+        }
+
+        function showTab(tab) {
+            // Hide all tabs
+            document.querySelectorAll('[id$="-tab"]').forEach(t => {
+                t.style.display = 'none';
+            });
+            
+            // Show selected tab
+            document.getElementById(tab + '-tab').style.display = 'block';
+            
+            // Update button states
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Initialize
+        renderMetrics();
+    </script>
+</body>
+</html>

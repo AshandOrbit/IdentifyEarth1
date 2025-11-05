@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STRIA Registry - Standards for Traceable Resource Integrity & Advancement</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #f8f9fa;
+            color: #1a1a1a;
+        }
+
+        .header {
+            background: #1a1a1a;
+            border-bottom: 3px solid #E8FF00;
+            padding: 1.5rem 2rem;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 42px;
+            height: 42px;
+        }
+
+        .branding h1 {
+            color: white;
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .branding .subtitle {
+            color: #E8FF00;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-top: 0.25rem;
+        }
+
+        .nav {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .nav-btn {
+            padding: 0.625rem 1.25rem;
+            border: none;
+            border-radius: 6px;
+            background: transparent;
+            color: #999;
+            cursor: pointer;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            color: white;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .nav-btn.active {
+            background: #E8FF00;
+            color: #1a1a1a;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #2c3e50 0%, #1a1a1a 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-bottom: 3px solid #E8FF00;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: rgba(255,255,255,0.9);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: white;
+            border: 2px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #E8FF00;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9375rem;
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .certification-levels {
+            background: white;
+            border: 2px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .level-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .level-item {
+            display: grid;
+            grid-template-columns: 80px 200px 1fr;
+            gap: 1.5rem;
+            padding: 1.25rem;
+            border: 2px solid #f0f0f0;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .level-item:hover {
+            border-color: #E8FF00;
+            box-shadow: 0 4px 12px rgba(232, 255, 0, 0.15);
+        }
+
+        .level-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #E8FF00;
+            color: #1a1a1a;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .level-name {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.125rem;
+            color: #1a1a1a;
+        }
+
+        .level-desc {
+            display: flex;
+            align-items: center;
+            color: #666;
+            font-size: 0.9375rem;
+            line-height: 1.5;
+        }
+
+        .pledge-section {
+            background: white;
+            border: 2px solid #e5e5e5;
+            border-left: 6px solid #E8FF00;
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .pledge-section h3 {
+            font-size: 1.5rem;
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+        }
+
+        .pledge-intro {
+            font-size: 1.0625rem;
+            line-height: 1.7;
+            color: #444;
+            margin-bottom: 2rem;
+        }
+
+        .pledge-pillars {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .pillar {
+            border-left: 4px solid #E8FF00;
+            padding-left: 1.5rem;
+        }
+
+        .pillar h4 {
+            font-size: 1.125rem;
+            color: #1a1a1a;
+            margin-bottom: 0.75rem;
+        }
+
+        .pillar p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.9375rem;
+        }
+
+        .registry-filters {
+            background: white;
+            border: 2px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 0.5rem;
+        }
+
+        .filter-select {
+            width: 100%;
+            padding: 0.625rem;
+            border: 2px solid #e5e5e5;
+            border-radius: 6px;
+            font-size: 0.9375rem;
+            background: white;
+            cursor: pointer;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: #E8FF00;
+        }
+
+        .mine-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .mine-card {
+            background: white;
+            border: 2px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.2s;
+        }
+
+        .mine-card:hover {
+            border-color: #E8FF00;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .mine-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .mine-info h3 {
+            font-size: 1.25rem;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .mine-location {
+            color: #666;
+            font-size: 0.9375rem;
+        }
+
+        .certification-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .badge-level-0 { background: #f0f0f0; color: #666; }
+        .badge-level-1 { background: #fff3cd; color: #856404; }
+        .badge-level-2 { background: #cce5ff; color: #004085; }
+        .badge-level-3 { background: #d4edda; color: #155724; }
+        .badge-level-4 { background: #d1ecf1; color: #0c5460; }
+        .badge-level-5 { background: #d6d8db; color: #1b1e21; }
+        .badge-level-6 { background: #E8FF00; color: #1a1a1a; }
+
+        .mine-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .mine-stat {
+            text-align: center;
+        }
+
+        .mine-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .mine-stat-label {
+            font-size: 0.8125rem;
+            color: #666;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e5e5e5;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #E8FF00 0%, #d4af37 100%);
+            transition: width 0.3s;
+        }
+
+        .cta-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .cta-card {
+            background: white;
+            border: 2px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .cta-card:hover {
+            border-color: #E8FF00;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .cta-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.75rem;
+        }
+
+        .cta-desc {
+            color: #666;
+            font-size: 0.9375rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .primary-btn {
+            padding: 0.75rem 1.5rem;
+            background: #E8FF00;
+            border: none;
+            border-radius: 6px;
+            color: #1a1a1a;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9375rem;
+            transition: all 0.2s;
+        }
+
+        .primary-btn:hover {
+            background: #d4e600;
+            transform: scale(1.02);
+        }
+
+        .secondary-btn {
+            padding: 0.75rem 1.5rem;
+            background: #1a1a1a;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9375rem;
+            transition: all 0.2s;
+        }
+
+        .secondary-btn:hover {
+            background: #2d2d2d;
+        }
+
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            border-top: 3px solid #E8FF00;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-text {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9375rem;
+            font-style: italic;
+        }
+
+        @media (max-width: 1024px) {
+            .stats-bar {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .level-item {
+                grid-template-columns: 1fr;
+            }
+            .mine-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .cta-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">
+                    <svg viewBox="0 0 100 100" fill="none">
+                        <path d="M50 5 L90 27.5 L90 72.5 L50 95 L10 72.5 L10 27.5 Z" 
+                              stroke="#E8FF00" stroke-width="4" fill="none"/>
+                        <path d="M50 15 L80 32.5 L80 67.5 L50 85 L20 67.5 L20 32.5 Z" 
+                              stroke="#E8FF00" stroke-width="4" fill="none"/>
+                        <path d="M50 25 L70 37.5 L70 62.5 L50 75" 
+                              stroke="#E8FF00" stroke-width="4" fill="none"/>
+                        <line x1="35" y1="50" x2="65" y2="50" 
+                              stroke="#E8FF00" stroke-width="4"/>
+                    </svg>
+                </div>
+                <div class="branding">
+                    <h1>STRIA™ REGISTRY</h1>
+                    <div class="subtitle">Standards for Traceable Resource Integrity & Advancement</div>
+                </div>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn active" onclick="showTab('registry')">Registry</button>
+                <button class="nav-btn" onclick="showTab('certification')">Certification</button>
+                <button class="nav-btn" onclick="showTab('pledge')">Miner's Pledge</button>
+                <button class="nav-btn" onclick="showTab('verify')">Verify</button>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <div class="hero">
+        <div class="hero-content">
+            <h2>Global Registry of Certified Mining Operations</h2>
+            <p>Advancing responsible mining through transparent certification, verified traceability, and continuous improvement. Net-zero by 2050.</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Registry Tab -->
+        <div id="registry-tab">
+            <!-- Stats -->
+            <div class="stats-bar">
+                <div class="stat-card">
+                    <div class="stat-value">156</div>
+                    <div class="stat-label">Certified Operations</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">47</div>
+                    <div class="stat-label">Countries</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">92</div>
+                    <div class="stat-label">Avg. Compliance Score</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">98%</div>
+                    <div class="stat-label">Supply Chain Traced</div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="registry-filters">
+                <div class="filter-group">
+                    <label class="filter-label">Certification Level</label>
+                    <select class="filter-select" onchange="filterMines()">
+                        <option value="all">All Levels</option>
+                        <option value="0">Level 0 - Registered</option>
+                        <option value="1">Level 1 - Committed</option>
+                        <option value="2">Level 2 - Trace Initiated</option>
+                        <option value="3">Level 3 - Verified Practices</option>
+                        <option value="4">Level 4 - Independently Audited</option>
+                        <option value="5">Level 5 - Certified with Distinction</option>
+                        <option value="6">Level 6 - LCA Prestige</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Country/Region</label>
+                    <select class="filter-select" onchange="filterMines()">
+                        <option value="all">All Countries</option>
+                        <option value="tanzania">Tanzania</option>
+                        <option value="canada">Canada</option>
+                        <option value="chile">Chile</option>
+                        <option value="usa">United States</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Mineral Type</label>
+                    <select class="filter-select" onchange="filterMines()">
+                        <option value="all">All Minerals</option>
+                        <option value="gold">Gold</option>
+                        <option value="copper">Copper</option>
+                        <option value="lithium">Lithium</option>
+                        <option value="silver">Silver</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Mine Registry -->
+            <h2 class="section-title">Certified Operations</h2>
+            <div class="mine-grid" id="mine-grid">
+                <!-- Mines will be rendered here -->
+            </div>
+        </div>
+
+        <!-- Certification Tab -->
+        <div id="certification-tab" style="display:none;">
+            <h2 class="section-title">STRIA™ Certification Framework</h2>
+            <p class="section-subtitle">A progressive 7-level system recognizing continuous improvement from registration to climate leadership</p>
+
+            <div class="certification-levels">
+                <h3 style="margin-bottom:1.5rem; font-size:1.5rem;">Certification Levels</h3>
+                <div class="level-grid">
+                    <div class="level-item">
+                        <div class="level-badge">0</div>
+                        <div class="level-name">Registered</div>
+                        <div class="level-desc">Declares existence + basic site info. Entity enrolled, no baseline met.</div>
+                    </div>
+                    <div class="level-item">
+                        <div class="level-badge">1</div>
+                        <div class="level-name">Committed</div>
+                        <div class="level-desc">Signs STRIA pledge + uploads ID/KYC. Committed to transparency.</div>
+                    </div>
+                    <div class="level-item">
+                        <div class="level-badge">2</div>
+                        <div class="level-name">Trace Initiated</div>
+                        <div class="level-desc">Begins batch logging or chain-of-custody. Chain-of-custody & FPIC logs submitted.</div>
+                    </div>
+                    <div class="level-item">
+                        <div class="level-badge">3</div>
+                        <div class="level-name">Verified Practices</div>
+                        <div class="level-desc">Provides ESG docs + basic MRV or third-party. Minimum ESG, labor, and water criteria met.</div>
+                    </div>
+                    <div class="level-item">
+                        <div class="level-badge">4</div>
+                        <div class="level-name">Independently Audited</div>
+                        <div class="level-desc">Site validated via NGO, community, or node. Documented progress on key gaps.</div>
+                    </div>
+                    <div class="level-item">
+                        <div class="level-badge">5</div>
+                        <div class="level-name">Certified with Distinction</div>
+                        <div class="level-desc">Full LCA, verified closure, traceable product. Certified closure + audit passed.</div>
+                    </div>
+                    <div class="level-item">
+                        <div class="level-badge">6</div>
+                        <div class="level-name">LCA Prestige</div>
+                        <div class="level-desc">Carbon-neutral or better, verified LCA. Climate leadership achieved.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top:2rem; padding:1.5rem; background:white; border:2px solid #e5e5e5; border-radius:12px;">
+                <h3 style="margin-bottom:1rem; font-size:1.25rem;">Multi-Path Entry</h3>
+                <p style="color:#666; line-height:1.6; margin-bottom:1rem;">
+                    STRIA™ recognizes that not all mines start from scratch. Entry points are flexible:
+                </p>
+                <ul style="color:#666; line-height:1.8; padding-left:1.5rem;">
+                    <li>New ASM sites may start at Level 0</li>
+                    <li>Established LSM operations with existing audits can enter at Level 3</li>
+                    <li>Refiners with clean handler data can enter directly into the handler track</li>
+                </ul>
+                <p style="color:#666; line-height:1.6; margin-top:1rem;">
+                    This flexibility allows onboarding without erasing legacy work — while still protecting trust and auditability.
+                </p>
+            </div>
+        </div>
+
+        <!-- Pledge Tab -->
+        <div id="pledge-tab" style="display:none;">
+            <div class="pledge-section">
+                <h3>EMC Minerals and Metals Miner's Pledge</h3>
+                <div class="pledge-intro">
+                    <p style="margin-bottom:1rem;">
+                        As miners, we recognize the urgency of addressing climate risk and reducing emissions. Our commitment to achieving <strong>net-zero emissions by 2050</strong>, with interim targets set for <strong>2030 and 2040</strong>, is essential in managing our climate impact now and for future generations.
+                    </p>
+                    <p>
+                        We acknowledge that addressing a critical challenge like global carbon emissions demands collaboration, innovation, and stakeholder commitment. Our defined actions focus on Origin Traceability Assurances, Environmental, Social, and Governance (ESG) Criteria, Climate and Carbon Protocols, and Reclamation and Closure Practices, guiding our meaningful progress toward a sustainable future.
+                    </p>
+                </div>
+
+                <div class="pledge-pillars">
+                    <div class="pillar">
+                        <h4>🔗 Origin Traceability Assurances</h4>
+                        <p>We commit to traceability from extraction to the consumer, auditing buyers to ensure compliance and sustainable practices across the supply chain. Data points such as sourcing, processing, and transportation can be tracked to foster transparency and accountability.</p>
+                    </div>
+
+                    <div class="pillar">
+                        <h4>🌍 Environmental, Social, and Governance (ESG) Criteria</h4>
+                        <p>We will adhere to recognized voluntary sustainability standards and commit to reducing waste and achieving fair wages across operations. Producers and handlers will be held accountable for protecting human rights, preserving ecosystems, and engaging communities.</p>
+                    </div>
+
+                    <div class="pillar">
+                        <h4>🌡️ Climate and Carbon Protocols</h4>
+                        <p>We will reduce emissions through targeted actions, including renewable energy integration, fleet electrification, and efficiency improvements, aiming for a 30% reduction by 2030. Additionally, we commit to investing in local carbon offset projects to generate community benefits and environmental justice outcomes.</p>
+                    </div>
+
+                    <div class="pillar">
+                        <h4>🌱 Reclamation and Closure Practices</h4>
+                        <p>We commit to restoring environments such as reforestation and water treatment practices, ensuring legacy management through long-term monitoring and dedicated financial reserves, and ensuring site transitions align with traditional land uses. Community and Indigenous stakeholders will guide reclamation priorities.</p>
+                    </div>
+                </div>
+
+                <div style="margin-top:2rem; padding-top:2rem; border-top:2px solid #f0f0f0;">
+                    <p style="color:#666; line-height:1.7; font-style:italic;">
+                        By fostering collaboration, we aim to realize environmental, social, and economic goals that benefit both people and the planet. Together, we commit to responsible production, processing, and consumption of essential commodities in the face of climate change. Through transparent reporting and continuous improvement, we will strive to achieve our sustainability commitments, adapting to emerging technologies and evolving best practices.
+                    </p>
+                </div>
+            </div>
+
+            <div style="text-align:center; margin-top:2rem;">
+                <button class="primary-btn" style="font-size:1.0625rem; padding:1rem 2rem;">Sign the Miner's Pledge</button>
+            </div>
+        </div>
+
+        <!-- Verify Tab -->
+        <div id="verify-tab" style="display:none;">
+            <h2 class="section-title">Certificate Verification</h2>
+            <p class="section-subtitle">Verify the authenticity of STRIA™ certificates and trace supply chain integrity</p>
+
+            <div style="background:white; border:2px solid #e5e5e5; border-radius:12px; padding:2.5rem; max-width:700px; margin:0 auto 3rem;">
+                <label style="display:block; font-weight:600; margin-bottom:0.75rem; font-size:1.0625rem;">Enter Certificate ID or Batch Number</label>
+                <input type="text" placeholder="e.g., STRIA-2024-001 or BATCH-TZ-2024-456" 
+                       style="width:100%; padding:1rem; border:2px solid #e5e5e5; border-radius:6px; font-size:1rem; margin-bottom:1.5rem;">
+                <button class="primary-btn" style="width:100%; font-size:1.0625rem; padding:1rem;">Verify Certificate</button>
+            </div>
+
+            <div class="cta-section" style="margin-top:0;">
+                <div class="cta-card">
+                    <div class="cta-icon">📱</div>
+                    <div class="cta-title">QR Code Scanner</div>
+                    <div class="cta-desc">Scan product QR codes to verify supply chain traceability</div>
+                    <button class="secondary-btn">Open Scanner</button>
+                </div>
+                <div class="cta-card">
+                    <div class="cta-icon">🔍</div>
+                    <div class="cta-title">Batch Lookup</div>
+                    <div class="cta-desc">Track specific material batches through the supply chain</div>
+                    <button class="secondary-btn">Search Batches</button>
+                </div>
+                <div class="cta-card">
+                    <div class="cta-icon">📊</div>
+                    <div class="cta-title">Audit Reports</div>
+                    <div class="cta-desc">Access public audit reports and compliance documentation</div>
+                    <button class="secondary-btn">View Reports</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTAs (shown on all tabs) -->
+        <div class="cta-section">
+            <div class="cta-card">
+                <div class="cta-icon">⛏️</div>
+                <div class="cta-title">Apply for Certification</div>
+                <div class="cta-desc">Mining operations ready to demonstrate responsible practices</div>
+                <button class="primary-btn">Start Application</button>
+            </div>
+            <div class="cta-card">
+                <div class="cta-icon">🏢</div>
+                <div class="cta-title">Become a Verified Buyer</div>
+                <div class="cta-desc">Jewelry brands, manufacturers, and supply chain partners</div>
+                <button class="primary-btn">Register as Buyer</button>
+            </div>
+            <div class="cta-card">
+                <div class="cta-icon">✅</div>
+                <div class="cta-title">Join Auditor Network</div>
+                <div class="cta-desc">NGOs, community organizations, and third-party auditors</div>
+                <button class="primary-btn">Apply as Auditor</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-content">
+            <p class="footer-text">
+                Every element tells a story. Element United built the system that maps them all—making trust infrastructure.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const mines = [
+            {
+                id: 'TZ-001',
+                name: 'TanzRoc Gold Mining',
+                country: 'Tanzania',
+                mineral: 'Gold',
+                level: 5,
+                levelName: 'Certified with Distinction',
+                compliance: 98,
+                lastAudit: '2024-10-15',
+                traced: 100,
+                emissions: '-18%'
+            },
+            {
+                id: 'CA-045',
+                name: 'Hoffman Yukon Operations',
+                country: 'Canada',
+                mineral: 'Gold',
+                level: 4,
+                levelName: 'Independently Audited',
+                compliance: 95,
+                lastAudit: '2024-11-01',
+                traced: 100,
+                emissions: '-22%'
+            },
+            {
+                id: 'CL-089',
+                name: 'Verde Copper Mining',
+                country: 'Chile',
+                mineral: 'Copper',
+                level: 3,
+                levelName: 'Verified Practices',
+                compliance: 87,
+                lastAudit: '2024-09-20',
+                traced: 95,
+                emissions: '-12%'
+            },
+            {
+                id: 'US-REX',
+                name: 'Rex Mine Gold (Arizona)',
+                country: 'USA',
+                mineral: 'Gold',
+                level: 4,
+                levelName: 'Independently Audited',
+                compliance: 93,
+                lastAudit: '2024-10-28',
+                traced: 98,
+                emissions: '-15%'
+            },
+            {
+                id: 'PE-234',
+                name: 'Andean Silver Co.',
+                country: 'Peru',
+                mineral: 'Silver',
+                level: 2,
+                levelName: 'Trace Initiated',
+                compliance: 72,
+                lastAudit: '2024-08-15',
+                traced: 78,
+                emissions: '-5%'
+            },
+            {
+                id: 'AU-567',
+                name: 'Outback Lithium',
+                country: 'Australia',
+                mineral: 'Lithium',
+                level: 6,
+                levelName: 'LCA Prestige',
+                compliance: 99,
+                lastAudit: '2024-11-05',
+                traced: 100,
+                emissions: '-45%'
+            }
+        ];
+
+        function renderMines() {
+            const grid = document.getElementById('mine-grid');
+            
+            grid.innerHTML = mines.map(mine => `
+                <div class="mine-card">
+                    <div class="mine-header">
+                        <div class="mine-info">
+                            <h3>${mine.name}</h3>
+                            <div class="mine-location">📍 ${mine.country} • ${mine.mineral}</div>
+                        </div>
+                        <div class="certification-badge badge-level-${mine.level}">
+                            Level ${mine.level}: ${mine.levelName}
+                        </div>
+                    </div>
+                    <div class="mine-stats">
+                        <div class="mine-stat">
+                            <div class="mine-stat-value">${mine.compliance}</div>
+                            <div class="mine-stat-label">Compliance Score</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${mine.compliance}%"></div>
+                            </div>
+                        </div>
+                        <div class="mine-stat">
+                            <div class="mine-stat-value">${mine.traced}%</div>
+                            <div class="mine-stat-label">Supply Chain Traced</div>
+                        </div>
+                        <div class="mine-stat">
+                            <div class="mine-stat-value">${mine.emissions}</div>
+                            <div class="mine-stat-label">Emissions vs 2020</div>
+                        </div>
+                        <div class="mine-stat">
+                            <div class="mine-stat-value" style="font-size:1rem;">${mine.lastAudit}</div>
+                            <div class="mine-stat-label">Last Audit</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterMines() {
+            // Placeholder for filter functionality
+            console.log('Filtering mines...');
+        }
+
+        function showTab(tab) {
+            // Hide all tabs
+            document.querySelectorAll('[id$="-tab"]').forEach(t => {
+                t.style.display = 'none';
+            });
+            
+            // Show selected tab
+            document.getElementById(tab + '-tab').style.display = 'block';
+            
+            // Update button states
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Initialize
+        renderMines();
+    </script>
+</body>
+</html>

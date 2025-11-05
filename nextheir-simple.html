@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextHeir - Digital Legacy Preservation | Element United</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            background: #FAF8F3;
+            color: #3E3E3E;
+        }
+
+        .sans {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        }
+
+        .header {
+            background: white;
+            border-bottom: 1px solid #E8E3D8;
+            padding: 1rem 2rem;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo {
+            width: 36px;
+            height: 36px;
+        }
+
+        h1 {
+            color: #3E3E3E;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            font-size: 0.75rem;
+            color: #5A5A5A;
+        }
+
+        .nav {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .nav-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            background: transparent;
+            color: #5A5A5A;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: #F5F3EE;
+        }
+
+        .nav-btn.active {
+            background: #D4AF37;
+            color: white;
+        }
+
+        .role-bar {
+            background: white;
+            border-bottom: 1px solid #E8E3D8;
+            padding: 0.75rem 2rem;
+        }
+
+        .role-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .role-label {
+            color: #5A5A5A;
+            font-size: 0.875rem;
+        }
+
+        .role-btn {
+            padding: 0.375rem 1rem;
+            border: none;
+            border-radius: 20px;
+            background: #F5F3EE;
+            color: #5A5A5A;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .role-btn:hover {
+            background: #E8E3D8;
+        }
+
+        .role-btn.active {
+            background: #D4AF37;
+            color: white;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background: white;
+            border: 1px solid #E8E3D8;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .metric-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            color: #5A5A5A;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-value {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #3E3E3E;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #3E3E3E;
+        }
+
+        .primary-btn {
+            padding: 0.625rem 1.25rem;
+            background: #D4AF37;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: opacity 0.2s;
+        }
+
+        .primary-btn:hover {
+            opacity: 0.9;
+        }
+
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .heirloom-card {
+            background: white;
+            border: 1px solid #E8E3D8;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: box-shadow 0.2s;
+        }
+
+        .heirloom-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .heirloom-image {
+            height: 200px;
+            background: #F5F3EE;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .heirloom-info {
+            padding: 1rem;
+        }
+
+        .heirloom-name {
+            font-weight: 600;
+            color: #3E3E3E;
+            margin-bottom: 0.25rem;
+        }
+
+        .heirloom-meta {
+            font-size: 0.75rem;
+            color: #5A5A5A;
+            margin-bottom: 0.75rem;
+        }
+
+        .heirloom-footer {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.875rem;
+        }
+
+        .heirloom-value {
+            color: #D4AF37;
+            font-weight: 600;
+        }
+
+        .heirloom-memories {
+            color: #5A5A5A;
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .package-card {
+            background: white;
+            border: 2px solid #E8E3D8;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .package-card.popular {
+            border-color: #D4AF37;
+            position: relative;
+        }
+
+        .popular-badge {
+            background: #D4AF37;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .package-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #3E3E3E;
+            margin-bottom: 0.25rem;
+        }
+
+        .package-desc {
+            font-size: 0.875rem;
+            color: #5A5A5A;
+            margin-bottom: 1rem;
+        }
+
+        .package-price {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #D4AF37;
+            margin-bottom: 0.25rem;
+        }
+
+        .package-period {
+            font-size: 0.875rem;
+            color: #5A5A5A;
+            margin-bottom: 1.5rem;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .features-list li {
+            padding: 0.5rem 0;
+            font-size: 0.875rem;
+            color: #5A5A5A;
+        }
+
+        .features-list li:before {
+            content: "✓ ";
+            color: #7D9B76;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .addons-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .addon-card {
+            background: white;
+            border: 1px solid #E8E3D8;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: box-shadow 0.2s;
+        }
+
+        .addon-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .addon-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .addon-name {
+            font-weight: 600;
+            color: #3E3E3E;
+            margin-bottom: 0.5rem;
+        }
+
+        .addon-price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #D4AF37;
+            margin-bottom: 1rem;
+        }
+
+        .partner-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .partner-card {
+            background: white;
+            border: 1px solid #E8E3D8;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: box-shadow 0.2s;
+        }
+
+        .partner-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .partner-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .partner-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #3E3E3E;
+            margin-bottom: 0.75rem;
+        }
+
+        .partner-desc {
+            color: #5A5A5A;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer {
+            background: white;
+            border-top: 1px solid #E8E3D8;
+            margin-top: 3rem;
+            padding: 2rem;
+            text-center;
+        }
+
+        .footer-text {
+            color: #999;
+            font-size: 0.875rem;
+            font-style: italic;
+        }
+
+        .intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+
+        .intro h2 {
+            font-size: 2rem;
+            color: #3E3E3E;
+            margin-bottom: 1rem;
+        }
+
+        .intro p {
+            font-size: 1.125rem;
+            color: #5A5A5A;
+        }
+
+        @media (max-width: 1024px) {
+            .metrics-grid,
+            .collection-grid,
+            .packages-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .addons-grid,
+            .partner-grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">
+                    <svg viewBox="0 0 100 100" fill="none">
+                        <path d="M50 5 L90 27.5 L90 72.5 L50 95 L10 72.5 L10 27.5 Z" 
+                              stroke="#D4AF37" stroke-width="3" fill="none"/>
+                        <circle cx="50" cy="50" r="15" stroke="#D4AF37" stroke-width="3" fill="none"/>
+                        <circle cx="50" cy="50" r="8" fill="#D4AF37"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1>NextHeir</h1>
+                    <div class="subtitle sans">Digital Legacy Preservation</div>
+                </div>
+            </div>
+            <nav class="nav sans">
+                <button class="nav-btn active" onclick="showTab('vault')">Vault</button>
+                <button class="nav-btn" onclick="showTab('services')">Services</button>
+                <button class="nav-btn" onclick="showTab('packages')">Packages</button>
+                <button class="nav-btn" onclick="showTab('partner')">Partner</button>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Role Selector -->
+    <div class="role-bar">
+        <div class="role-content sans">
+            <span class="role-label">View as:</span>
+            <button class="role-btn active" onclick="switchRole('family')">Individual/Family</button>
+            <button class="role-btn" onclick="switchRole('attorney')">Estate Attorney</button>
+            <button class="role-btn" onclick="switchRole('museum')">Museum/Collector</button>
+            <button class="role-btn" onclick="switchRole('insurance')">Insurance Agent</button>
+            <button class="role-btn" onclick="switchRole('brand')">Luxury Brand</button>
+            <button class="role-btn" onclick="switchRole('wedding')">Weddings</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Vault Tab -->
+        <div id="vault-tab">
+            <div class="metrics-grid sans" id="metrics-grid"></div>
+            
+            <div id="collection-section">
+                <div class="section-header">
+                    <h2 class="section-title">Your Collection</h2>
+                    <button class="primary-btn sans">+ Add Heirloom</button>
+                </div>
+                
+                <div class="collection-grid">
+                    <div class="heirloom-card">
+                        <div class="heirloom-image">💍</div>
+                        <div class="heirloom-info sans">
+                            <div class="heirloom-name">Grandmother's Diamond Ring</div>
+                            <div class="heirloom-meta">Jewelry • 1947</div>
+                            <div class="heirloom-footer">
+                                <span class="heirloom-value">$12,500</span>
+                                <span class="heirloom-memories">8 memories</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="heirloom-card">
+                        <div class="heirloom-image">🏠</div>
+                        <div class="heirloom-info sans">
+                            <div class="heirloom-name">Family Home - Brooklyn</div>
+                            <div class="heirloom-meta">Real Estate • 1965</div>
+                            <div class="heirloom-footer">
+                                <span class="heirloom-value">$1.2M</span>
+                                <span class="heirloom-memories">24 memories</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="heirloom-card">
+                        <div class="heirloom-image">🍽️</div>
+                        <div class="heirloom-info sans">
+                            <div class="heirloom-name">Wedding China Collection</div>
+                            <div class="heirloom-meta">Heirloom • 1952</div>
+                            <div class="heirloom-footer">
+                                <span class="heirloom-value">$3,200</span>
+                                <span class="heirloom-memories">12 memories</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="heirloom-card">
+                        <div class="heirloom-image">⌚</div>
+                        <div class="heirloom-info sans">
+                            <div class="heirloom-name">Father's Watch - Omega</div>
+                            <div class="heirloom-meta">Timepiece • 1978</div>
+                            <div class="heirloom-footer">
+                                <span class="heirloom-value">$8,900</span>
+                                <span class="heirloom-memories">6 memories</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Services Tab -->
+        <div id="services-tab" style="display:none;">
+            <div class="intro">
+                <h2>Services & Add-ons</h2>
+                <p>Enhance your legacy with professional storytelling, video recording, and custom design</p>
+            </div>
+
+            <div class="addons-grid sans">
+                <div class="addon-card">
+                    <div class="addon-icon">📝</div>
+                    <div class="addon-name">Professional Story Writing</div>
+                    <div class="addon-price">$199</div>
+                    <button class="primary-btn">Add to Package</button>
+                </div>
+
+                <div class="addon-card">
+                    <div class="addon-icon">🎥</div>
+                    <div class="addon-name">Video Recording Session</div>
+                    <div class="addon-price">$299</div>
+                    <button class="primary-btn">Add to Package</button>
+                </div>
+
+                <div class="addon-card">
+                    <div class="addon-icon">🎨</div>
+                    <div class="addon-name">Custom Certificate Design</div>
+                    <div class="addon-price">$149</div>
+                    <button class="primary-btn">Add to Package</button>
+                </div>
+
+                <div class="addon-card">
+                    <div class="addon-icon">💎</div>
+                    <div class="addon-name">Appraisal Integration</div>
+                    <div class="addon-price">$99</div>
+                    <button class="primary-btn">Add to Package</button>
+                </div>
+
+                <div class="addon-card">
+                    <div class="addon-icon">🌳</div>
+                    <div class="addon-name">Family Tree Mapping</div>
+                    <div class="addon-price">$179</div>
+                    <button class="primary-btn">Add to Package</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Packages Tab -->
+        <div id="packages-tab" style="display:none;">
+            <div class="intro">
+                <h2>Choose Your Legacy Package</h2>
+                <p>One-time purchase. Lifetime preservation. No subscriptions.</p>
+            </div>
+
+            <div class="packages-grid sans">
+                <div class="package-card">
+                    <div class="package-name">Keepsake</div>
+                    <div class="package-desc">One memory that matters</div>
+                    <div class="package-price">$29</div>
+                    <div class="package-period">one-time</div>
+                    <ul class="features-list">
+                        <li>1 Digital Certificate</li>
+                        <li>Photo & Document Upload</li>
+                        <li>Basic Story Template</li>
+                        <li>Share with 3 People</li>
+                        <li>Permanent Storage</li>
+                    </ul>
+                    <button class="primary-btn" style="width:100%;">Get Started</button>
+                </div>
+
+                <div class="package-card popular">
+                    <div class="popular-badge">MOST POPULAR</div>
+                    <div class="package-name">Legacy Collection</div>
+                    <div class="package-desc">Curated family collection</div>
+                    <div class="package-price">$99</div>
+                    <div class="package-period">one-time</div>
+                    <ul class="features-list">
+                        <li>10 Digital Certificates</li>
+                        <li>Photo, Video & Audio Upload</li>
+                        <li>Custom Story Templates</li>
+                        <li>Share with 10 People</li>
+                        <li>Family Tree Integration</li>
+                        <li>Email Support</li>
+                    </ul>
+                    <button class="primary-btn" style="width:100%;">Get Started</button>
+                </div>
+
+                <div class="package-card">
+                    <div class="package-name">Archive</div>
+                    <div class="package-desc">Build your digital archive</div>
+                    <div class="package-price">$249</div>
+                    <div class="package-period">one-time</div>
+                    <ul class="features-list">
+                        <li>50 Digital Certificates</li>
+                        <li>Unlimited Media Upload</li>
+                        <li>Professional Story Support</li>
+                        <li>Unlimited Sharing</li>
+                        <li>Provenance Timeline</li>
+                        <li>Priority Support</li>
+                        <li>Estate Planning Tools</li>
+                    </ul>
+                    <button class="primary-btn" style="width:100%;">Start Archiving</button>
+                </div>
+
+                <div class="package-card">
+                    <div class="package-name">Estate</div>
+                    <div class="package-desc">Complete generational vault</div>
+                    <div class="package-price">$499</div>
+                    <div class="package-period">one-time</div>
+                    <ul class="features-list">
+                        <li>Unlimited Certificates</li>
+                        <li>Concierge Service</li>
+                        <li>White-Glove Onboarding</li>
+                        <li>Attorney Portal Access</li>
+                        <li>Custom Templates</li>
+                        <li>Video Storytelling</li>
+                        <li>API Access</li>
+                        <li>Dedicated Manager</li>
+                    </ul>
+                    <button class="primary-btn" style="width:100%;">Contact Sales</button>
+                </div>
+            </div>
+
+            <div style="text-align:center; margin-top:2rem; padding:1.5rem; background:white; border-radius:12px; border:1px solid #E8E3D8;" class="sans">
+                <strong>First 250 customers receive 20% off</strong> all packages. Use code <strong style="color:#D4AF37;">LEGACY20</strong> at checkout.
+            </div>
+        </div>
+
+        <!-- Partner Tab -->
+        <div id="partner-tab" style="display:none;">
+            <div class="intro">
+                <h2>Partner With NextHeir</h2>
+                <p>Join our network of trusted professionals, vendors, and enterprises</p>
+            </div>
+
+            <div class="partner-grid sans">
+                <div class="partner-card">
+                    <div class="partner-icon">🤝</div>
+                    <div class="partner-title">Become a Vendor</div>
+                    <div class="partner-desc">Appraisers, photographers, attorneys, and estate professionals</div>
+                    <button class="primary-btn">Apply Now</button>
+                </div>
+
+                <div class="partner-card">
+                    <div class="partner-icon">🏢</div>
+                    <div class="partner-title">Enterprise Solutions</div>
+                    <div class="partner-desc">White-label, API access, volume licensing for institutions</div>
+                    <button class="primary-btn" style="background:#3E3E3E;">Request Demo</button>
+                </div>
+
+                <div class="partner-card">
+                    <div class="partner-icon">📈</div>
+                    <div class="partner-title">Investment Opportunities</div>
+                    <div class="partner-desc">Join our journey to preserve the world's legacy</div>
+                    <button class="primary-btn" style="background:#3E3E3E;">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p class="footer-text">
+            Every element tells a story. Element United built the system that maps them all—making trust infrastructure.
+        </p>
+    </div>
+
+    <script>
+        const metrics = {
+            family: [
+                { label: 'Items Preserved', value: '24', icon: '🏛️' },
+                { label: 'Memories Attached', value: '87', icon: '💭' },
+                { label: 'Family Members', value: '8', icon: '👨‍👩‍👧‍👦' },
+                { label: 'Total Value', value: '$1.2M', icon: '💰' }
+            ],
+            attorney: [
+                { label: 'Client Estates', value: '45', icon: '📋' },
+                { label: 'Assets Documented', value: '892', icon: '📄' },
+                { label: 'Active Cases', value: '12', icon: '⚖️' },
+                { label: 'Settlement Ready', value: '8', icon: '✅' }
+            ],
+            museum: [
+                { label: 'Collection Items', value: '3,421', icon: '🏛️' },
+                { label: 'Verified Provenance', value: '98%', icon: '✓' },
+                { label: 'On Display', value: '287', icon: '🖼️' },
+                { label: 'Total Value', value: '$45M', icon: '💎' }
+            ],
+            insurance: [
+                { label: 'Active Policies', value: '234', icon: '🛡️' },
+                { label: 'Verified Assets', value: '1,456', icon: '✓' },
+                { label: 'Claims Processed', value: '18', icon: '📋' },
+                { label: 'Coverage Total', value: '$12M', icon: '💰' }
+            ],
+            brand: [
+                { label: 'Products Certified', value: '8,942', icon: '💍' },
+                { label: 'Active Certificates', value: '8,129', icon: '📜' },
+                { label: 'Customer Trust', value: '4.9/5', icon: '⭐' },
+                { label: 'Return Rate', value: '0.3%', icon: '📊' }
+            ],
+            wedding: [
+                { label: 'Couples Served', value: '347', icon: '💑' },
+                { label: 'Gifts Registered', value: '4,289', icon: '🎁' },
+                { label: 'Legacy Items', value: '892', icon: '💍' },
+                { label: 'Avg. Gift Value', value: '$2,400', icon: '💝' }
+            ]
+        };
+
+        let currentRole = 'family';
+
+        function renderMetrics() {
+            const grid = document.getElementById('metrics-grid');
+            const data = metrics[currentRole];
+            
+            grid.innerHTML = data.map(m => `
+                <div class="metric-card">
+                    <div class="metric-icon">${m.icon}</div>
+                    <div class="metric-label">${m.label}</div>
+                    <div class="metric-value">${m.value}</div>
+                </div>
+            `).join('');
+        }
+
+        function switchRole(role) {
+            currentRole = role;
+            
+            document.querySelectorAll('.role-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Show/hide collection based on role
+            const collectionSection = document.getElementById('collection-section');
+            if (role === 'family') {
+                collectionSection.style.display = 'block';
+            } else {
+                collectionSection.style.display = 'none';
+            }
+            
+            renderMetrics();
+        }
+
+        function showTab(tab) {
+            document.querySelectorAll('[id$="-tab"]').forEach(t => {
+                t.style.display = 'none';
+            });
+            
+            document.getElementById(tab + '-tab').style.display = 'block';
+            
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        renderMetrics();
+    </script>
+</body>
+</html>
